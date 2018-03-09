@@ -1,4 +1,3 @@
-
 function counter(currentState, action){
 	var DEFAULT_STATE = 0;
 	if(currentState === undefined){

@@ -12,19 +12,17 @@ var sumNumber = function sum(a, b){
 
 //ASYN
 var asyncIncrease = function (dispatch, state){
-	_fakeServerApi.increaseCount(state.count,
+	_fakeServerApi.increaseCount(state.count.result,
 		function(data){
 			dispatch({type: 'INCREMENT'});
 	});
 };
 
-var getRandomImages = function(dispatch, store){
-	store.dispatch(type : "IMAGE_LOADING");
-	//var imgurAPI = "https://api.imgur.com/3/gallery/random/random/1";
-	var imgurAPI = "http://localhost:3000/data";
+var getRandomImages = function(dispatch, state){
+	dispatch({type : "IMAGE_LOADING"});
+	var imgurAPI = "https://api.imgur.com/3/gallery/random/random/1";
 	$.getJSON(imgurAPI).done(function(data){
-		var action = {type : 'IMAGES', data : data};
-		//console.log("API data : ", data);
+		var action = {type : 'IMAGES', data : data.data};
 		dispatch(action);
 	});
 }

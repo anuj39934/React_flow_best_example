@@ -29,14 +29,14 @@ const crashReporter = function () {
 }
 
 //third middleware 
-const thunk = function(){
+const thunk = function(store){
 	return function (next){
 		return function(action){
 			if(typeof action === 'function'){
 				action(store.dispatch, store.getState());
 			}else{
 				next(action);
-			}
+			} 
 		}
 	}
 };
@@ -61,12 +61,12 @@ function render(){
 	}else {
 		document.getElementById('status').innerHTML = "loaded";
 	}
-	document.getElementById('ImageStatus').innerHTML = state.image.loading;
-	if(state.image.loading == "loading..."){
+	document.getElementById('imageStatus').innerHTML = state.images.loading;
+	if(state.images.loading == "loading..."){
 		document.getElementById('imageList').innerHTML = "";
-	}else if(state.image.loading == "loaded"){
-		for(var i=0;i < state.image.data.length;i++){
-			document.getElementById(imageList).innerHTML +=("<img src=''" +state.image.data[i].link +"style='height:200px'>");
+	}else if(state.images.loading == "loaded"){
+		for(var i=0;i < state.images.data.length;i++){
+			document.getElementById(imageList).innerHTML +=("<img src=''" +state.images.data[i].link +"style='height:200px'>");
 		}
 	}
 };
